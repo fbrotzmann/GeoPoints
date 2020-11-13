@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GeoPoints.Models;
+using Newtonsoft.Json;
+//using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,14 +16,30 @@ namespace GeoPoints.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
-        // GET: api/<ValuesController>
         [HttpGet]
-        public async Task<ActionResult<string>> Get()
+        public async Task<IActionResult> GetAction()
         {
-            string url = "https://api.openweathermap.org/data/2.5/weather?id=3530597&appid=a627a555f8b6f69a7ef4781d5448c1ff&units=metric";
-            using (HttpClient client = new HttpClient())
+            using (var client = new HttpClient())
             {
-                return await client.GetStringAsync(url);
+                try
+                {
+                    client.BaseAddress = new Uri("http://api.openweathermap.org");
+                    var response = await client.GetAsync($"/data/2.5/weather?id=3530597&appid=a627a555f8b6f69a7ef4781d5448c1ff&units=metric");
+                    response.EnsureSuccessStatusCode();
+
+                    var stringResult = await response.Content.ReadAsStringAsync();
+                    var rawWeather = JsonConvert.DeserializeObject<OpenWeather>(stringResult);
+                    return Ok(new
+                    {
+                        Temp = rawWeather.Main.Temp,
+                        Summary = string.Join(",", rawWeather.Weather.Select(x => x.Main)),
+                        City = rawWeather.Name
+                    });
+                }
+                catch (HttpRequestException httpRequestException)
+                {
+                    return BadRequest($"Error getting weather from OpenWeather: {httpRequestException.Message}");
+                }
             }
         }
     }

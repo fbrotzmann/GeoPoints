@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Point } from '../point';
 import * as Highcharts from 'highcharts';
@@ -7,7 +7,7 @@ import * as Highcharts from 'highcharts';
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html'
 })
-export class PieChartComponent implements OnInit {
+export class PieChartComponent {
   public points: Point[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
