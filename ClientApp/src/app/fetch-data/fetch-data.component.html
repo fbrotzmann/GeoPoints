@@ -1,0 +1,24 @@
+<h1 id="tableLabel">Points</h1>
+
+<p *ngIf="!points"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="points">
+  <thead>
+    <tr>
+      <th>Latitud</th>
+      <th>Longitud</th>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Zona</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let point of points">
+      <td>{{ point.latitud }}</td>
+      <td>{{ point.longitud }}</td>
+      <td>{{ point.nombre }}</td>
+      <td>{{ point.precio }}</td>
+      <td>{{ point.zona }}</td>
+    </tr>
+  </tbody>
+</table>
