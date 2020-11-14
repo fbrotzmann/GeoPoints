@@ -6,25 +6,18 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './weather.component.html'
 })
 export class WeatherComponent {
-  openWeather: OpenWeather;
+  public weather: Weather;
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<OpenWeather>(baseUrl + 'OpenWeather').subscribe(result => {
-      this.openWeather = result;
+    http.get<Weather>(baseUrl + 'OpenWeather').subscribe(result => {
+      this.weather = result;
     }, error => console.error(error));
-   
   }
+}
 
+interface Weather {
+  temp: string;
+  summary: string;
+  city: string;
+}
 
-}
-interface OpenWeather {
-  main: [];
-  name: string
-}
-interface Main {
-     temp: number
-     temp_min: number
-     Temp_max: number
-     pressure: number
-     humidity: number
-}

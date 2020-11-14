@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { OnChanges, OnInit, AfterViewInit, Component } from '@angular/core';
 import { MarkerService } from '../_services/marker.service';
 import * as L from 'leaflet';
 
@@ -24,12 +24,12 @@ L.Marker.prototype.options.icon = iconDefault;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements OnInit {
   private map;
 
   constructor(private markerService: MarkerService) { }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.initMap();
     this.markerService.makePoints(this.map);
   }

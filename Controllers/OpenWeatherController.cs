@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GeoPoints.Models;
 using Newtonsoft.Json;
-//using System.Text.Json;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GeoPoints.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class WeatherController : ControllerBase
+    public class OpenWeatherController : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> GetAction()
@@ -24,7 +22,7 @@ namespace GeoPoints.Controllers
                 try
                 {
                     client.BaseAddress = new Uri("http://api.openweathermap.org");
-                    var response = await client.GetAsync($"/data/2.5/weather?id=3530597&appid=a627a555f8b6f69a7ef4781d5448c1ff&units=metric");
+                    var response = await client.GetAsync($"/data/2.5/weather?id=3530597&appid=a627a555f8b6f69a7ef4781d5448c1ff&units=metric&lang=es");
                     response.EnsureSuccessStatusCode();
 
                     var stringResult = await response.Content.ReadAsStringAsync();

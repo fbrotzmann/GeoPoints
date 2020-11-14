@@ -3,11 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
 import { Point } from '../point';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
+
 export class MarkerService {
+  static ScaledRadius(precio: number, maxVal: number) {
+      throw new Error('Method not implemented.');
+  }
+
   public points: Point[];
+
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string)
   {
     http.get<Point[]>(baseUrl + 'Points').subscribe(result => { this.points = result; }, error => console.error(error));

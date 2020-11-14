@@ -41,7 +41,6 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\map\map.component.ts" />
-    <None Remove="ClientApp\src\app\openWeather.ts" />
     <None Remove="ClientApp\src\app\pie-chart\pi-chart.component.ts" />
     <None Remove="ClientApp\src\app\point.ts" />
   </ItemGroup>
