@@ -3,21 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { Point } from '../point';
 import * as Highcharts from 'highcharts';
 
-import { MarkerService } from '../_services/marker.service';
 
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html'
 })
-export class PieChartComponent {
-  public points: Point[];
 
-  constructor(private markerService: MarkerService,
-    http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+export class PieChartComponent {
+
+  public points: Point[];
+  
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<Point[]>(baseUrl + 'Points').subscribe(result => {
       this.points = result;
     }, error => console.error(error));
   }
+  
 
   public sumaNorte: number = 300000;
   public sumaSur: number = 125000;

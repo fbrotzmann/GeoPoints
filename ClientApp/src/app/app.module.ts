@@ -12,7 +12,7 @@ import { WeatherComponent } from './weather/weather.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 
-import { MarkerService } from './_services/marker.service';
+import { MarkerService } from './services/marker.service';
 
 @NgModule({
   declarations: [

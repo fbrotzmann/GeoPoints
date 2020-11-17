@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Point } from '../point';
 
 @Component({
   selector: 'app-fetch-data',
@@ -13,12 +14,4 @@ export class FetchDataComponent {
       this.points = result;
     }, error => console.error(error));
   }
-}
-
-interface Point {
-  latitud: number;
-  longitud: number;
-  nombre: string;
-  precio: number;
-  zona: string;
 }
